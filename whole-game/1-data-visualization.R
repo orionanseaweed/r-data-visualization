@@ -1,3 +1,5 @@
+# required commands
+
 install.packages("tidyverse")
 
 library(tidyverse)
@@ -8,7 +10,7 @@ library(ggthemes)
 
 str(penguins)
 
-# 1.2.5 Exercise 8: Recreate the visualization.
+# 1.2.5 exercise 8: recreate the visualization
 
 ggplot(
   penguins,
