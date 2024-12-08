@@ -1,4 +1,4 @@
-# required commands
+# requirements
 
 install.packages("tidyverse")
 
