@@ -1,9 +1,7 @@
 Ex.9.2.1.1: Create a scatterplot of hwy vs. displ where the points are pink filled in triangles.
 
-``` r
 ggplot(mpg, aes(x = hwy, y = displ))
 + geom_point(color = "pink", shape = "triangle")
-```
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------
 
