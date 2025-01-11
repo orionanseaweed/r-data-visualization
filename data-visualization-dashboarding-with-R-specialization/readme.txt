@@ -1,6 +1,4 @@
-Data Visualization & Dashboarding with R Specialization
-Visualize Data in R and Share Insights with Others
-
+Coursera: Data Visualization & Dashboarding with R Specialization
 Instructor: Collin Paschall
 
 https://www.coursera.org/specializations/jhu-data-visualization-dashboarding-with-r
