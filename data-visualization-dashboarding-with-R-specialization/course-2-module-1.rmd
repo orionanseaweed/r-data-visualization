@@ -1,0 +1,78 @@
+---
+title: "Week 1 Peer Review"
+output: html_document
+author: Xuan Tung Hoang
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+
+cel <- drop_na(read_csv(url("https://www.dropbox.com/s/4ebgnkdhhxo5rac/cel_volden_wiseman%20_coursera.csv?raw=1")))
+
+```
+
+Your objective is to replicate these figures, created using the Center of Legislative Effectiveness Data.
+
+**IMPORTANT: Filter your data so you are only displaying information for the 115th Congress.**
+
+## Exercise 1
+
+```{r exercise1,echo=FALSE}
+
+cel1 <- cel |> filter(congress == 115)
+
+Gender <- recode(cel1$female, '0' = 'Male', '1' = 'Female')
+cel2 <- add_column(cel1, Gender)
+
+p1 <- ggplot(cel2, aes(x = dwnom1, y = all_pass, color = Gender)) +
+  geom_point() +
+  labs(x = "Ideology", y = "Bills Passed")
+
+p1
+
+```
+
+## Exercise 2
+
+```{r exercise2,echo=FALSE}
+
+cel1 <- cel |> filter(congress == 115)
+
+Gender <- recode(cel1$female, '0' = "Male", '1' = "Female")
+cel2 <- add_column(cel1, Gender)
+
+mjrt <- recode(cel2$majority, '0' = "Minority", '1' = "Majority")
+cel2 <- add_column(cel1, mjrt)
+
+p2 <- ggplot(cel2, aes(x = votepct, y = all_pass, color = Gender)) +
+  geom_point() +
+  facet_wrap(vars(mjrt)) +
+  scale_color_manual(values = c("orange", "green")) +
+  labs(x = "Vote Percentage", y = "Bills Passed")
+                     
+p2
+
+```
+
+## Exercise 3
+
+```{r exercise3,echo=FALSE}
+
+cel1 <- cel |> filter(congress == 115)
+
+mjrt <- recode(cel2$majority, '0' = "Minority", '1' = "Majority")
+cel2 <- add_column(cel1, mjrt)
+
+p3 <- ggplot(cel2, aes(x = mjrt, y = les)) +
+  geom_boxplot() +
+  labs(x = "Majority or Minority",
+       y = "Legislative Effectiveness",
+       title = "LES in the 115th Congress"
+  )
+
+p3
+
+```
