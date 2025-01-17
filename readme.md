@@ -1,4 +1,4 @@
-# r-for-data-science-solution
+# r-peer-graded-assignment-solutions
 
 My answers to practice questions from **Data Visualization & Dashboarding with R Specialization** in Coursera.
 
