@@ -13,13 +13,17 @@ My answers to practice questions in **R for Data Science** textbook and **Data V
 3. The R Graph Gallery: https://r-graph-gallery.com/
 
 **Additional Resources:**
-1. SDS 348 Spring 2020, Comp. Biology and Bioinf., The Wilke Lab: https://wilkelab.org/classes/SDS348_spring_2020.html (stats, R, Python)
+1. SDS 348 Spring 2020, Comp. Biology and Bioinf., The Wilke Lab:
+   https://wilkelab.org/classes/SDS348_spring_2020.html (stats, R, Python)
 2. Computational Genomics with R: https://compgenomr.github.io/book/
-3. A Guide to Inkscape: http://tavmjong.free.fr/INKSCAPE/ (professional vector graphics software, for adjusting plots)
+3. A Guide to Inkscape:
+   http://tavmjong.free.fr/INKSCAPE/ (professional vector graphics software, for adjusting plots)
 
 **Online Courses/Specializations:**
-1. JHU - Data Visualization & Dashboarding with R: https://www.coursera.org/specializations/jhu-data-visualization-dashboarding-with-r
-2. JHU - Data Visualization for Genome Biology: https://www.coursera.org/learn/data-visualization-for-genome-biology
+1. JHU - Data Visualization & Dashboarding with R:
+   https://www.coursera.org/specializations/jhu-data-visualization-dashboarding-with-r
+2. JHU - Data Visualization for Genome Biology:
+   https://www.coursera.org/learn/data-visualization-for-genome-biology
 
 <br />
 
