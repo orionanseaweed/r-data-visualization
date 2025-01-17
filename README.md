@@ -16,6 +16,8 @@ Course 4: Publishing Visualizations in R with Shiny and flexdashboard
 
 Course 5: Data Visualization Capstone  
 
+<br />
+
 Authored by Kane - 11/01/2025
 
 ------
