@@ -1,0 +1,162 @@
+---
+title: "Week 3 Peer Review"
+output: html_document
+author: Xuan Tung Hoang
+---
+
+```{r setup, include=FALSE}
+
+knitr::opts_chunk$set(echo = TRUE)
+
+install.packages("gghighlight")
+library(tidyverse)
+library(gghighlight)
+library(ggthemes)
+
+cces <- drop_na(read_csv(url("https://www.dropbox.com/s/ahmt12y39unicd2/cces_sample_coursera.csv?raw=1")))
+
+cel <- drop_na(read_csv(url("https://www.dropbox.com/s/4ebgnkdhhxo5rac/cel_volden_wiseman%20_coursera.csv?raw=1")))
+
+```
+
+## Exercise 1
+
+About: Here I created a scatter plot to visualize the relationship between Legislative Professionalism and Committee-Reviewed Bills in the 115th Congress, from cel data frame with the variable "state_leg_prof" for x-axis and "all_aic" for y-axis. I recoded the data for the “latino” variable and rename it as “Ethnicity” to generate the correct labels for the legend. I set the color aesthetic in the ggplot() function to make the color of the dots change based on Ethnicity. I also use ggtheme() and annotate() as the task requirements.
+
+Plot:
+
+```{r exercise1,echo=FALSE}
+
+cel1 <- cel |> filter(congress == 115)
+
+latino1 <- recode(cel1$latino, '0' = "Non Latino", '1' = "Latino")
+
+cel2 <- add_column(cel1, latino1)
+
+p1 <- ggplot(cel2, aes(x = state_leg_prof, y = all_aic, color = latino1)) +
+  geom_point() +
+  labs(title = "Impact of Legislative Professionalism on Committee-Reviewed Bills in the 115th Congress",
+       x = "State Legislature Professionalism",
+       y = "Committee-Reviewed Bills",
+    color = "Ethnicity"
+  ) +
+  theme_few() +
+  scale_y_continuous(breaks = c(0, 5, 10, 15, 20)) +
+  annotate("rect", xmin = .27, xmax = .37, ymin = 18, ymax = 20,
+           alpha = .2, fill = "red") +
+  annotate("curve", x = .45, y = 17.5, xend = .33, yend = 19.05,
+           curvature = .2, arrow = arrow(length = unit(2, "mm"))) +
+  annotate("text", x = .46, y = 17, label = "highest", color = "red", hjust = "left")
+
+  #gghighlight(max(all_aic) < 10)
+
+p1
+
+```
+
+## Exercise 2
+
+About: Here I created a box plot to visualize the difference between the meddist of Lation and Non Latino ethnicity in the 115th Congress, from cel data frame with the variable "latino" for x-axis and "meddist" for y-axis. I recoded the data for the “latino” variable and rename it as “Latino” and "Non Latino" to generate the correct labels.
+
+Plot:
+
+```{r exercise2,echo=FALSE}
+
+cel1 <- cel |> filter(congress == 115)
+
+latino1 <- recode(cel2$latino, '0' = "Non Latino", '1' = "Latino")
+
+cel2 <- add_column(cel1, latino1)
+
+p2 <- ggplot(cel2, aes(x = latino1, y = meddist)) +
+  geom_boxplot() +
+  labs(title = "Meddist of Latino with Non Latino in the 115th Congress",
+       x = "Latino or Non Latino",
+       y = "Meddist"
+  )
+
+p2  
+
+```
+
+## Exercise 3
+
+About: Here I created a bar plot to visualize the distribution of marital status in four regions, from cces data frame with the variable "region" for x-axis and "marstat" for y-axis. I recoded the data for the “marstat” and "region" variable and rename it as “Marital Status” and "Region" to generate the correct labels for the legend and axis. I set the color aesthetic in the ggplot() function to make the color of the columns change based on Marital Status. I also use scale_fill_manual() to change the colors as the task requirements.
+
+Plot:
+
+```{r exercise3,echo=FALSE}
+
+marstat_1 <- recode(
+  cces$marstat,
+  "1" = "Married",
+  "2" = "Separated",
+  "3"= "Divorced",
+  "4" = "Widowed",
+  "5" = "Never Married",
+  "6" = "Domestic/civil partnership"
+)
+
+cces_1 <- add_column(cces, marstat_1)
+
+region_1 <- recode(
+  cces$region,
+  "1" = "Northwest",
+	"2" = "Midwest",
+	"3" = "South",
+	"4" = "West"
+)
+
+cces_2 <- add_column(cces_1, region_1)
+
+p3 <- ggplot(cces_1, aes(x = region_1, fill = marstat_1)) +
+  geom_bar(position = "dodge") +
+  labs(
+    title = "Distribution of Marital Status in Four Regions",
+    x = "Region",
+    y = "Count",
+    fill = "Marital Status"
+  ) +
+  scale_fill_manual(values=c("#cb997e", "#ddbea9", "#ff91ad", "#79d3be", "#a5a58d", "#6b705c"))
+
+p3
+
+```
+
+## Exercise 4
+
+About: Here I created a line plot to visualize the monthly rainfall in ASEAN countries through a year, from my dummy data frame with the auto-generated variable "month" for x-axis and "monthly_rainfall" for y-axis. I set the color aesthetic in the ggplot() function to make the color of the columns change based on Country. I also use facet_wrap() to change facetting data and theme() to adjust the place of x-axis elements as the task requirements.
+
+Plot:
+
+```{r exercise4,echo=FALSE}
+
+country <- c("Vietnam", "Laos", "Thailand")
+
+monthly_rainfall <- runif(36, 50, 300)
+
+month <- c(seq(from = 1, to = 12, by = 1))
+
+my_dummy_dat <- expand.grid(country, month)
+
+my_dummy_dat <- add_column(my_dummy_dat, monthly_rainfall)
+
+my_dummy_dat <- rename(my_dummy_dat,
+                       "country" = Var1,
+                       "month" = Var2,
+                       )
+
+p4 <- ggplot(my_dummy_dat, aes(x = month, y = monthly_rainfall, color = country)) +
+  geom_line() +
+  facet_wrap(~country) +
+  labs(title = "Monthly Rainfall in ASEAN countries",
+       x = "Month",
+       y = "Monthly Rainfall (mm)"
+  ) +
+  guides(color = "none") +
+  scale_x_continuous(breaks = c(2, 4, 6, 8, 10, 12)) +
+  theme(axis.text.x=element_text(angle=45,hjust=1))
+
+p4
+  
+```
