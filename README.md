@@ -2,7 +2,10 @@
 
 My answers to practice questions in **R for Data Science** textbook and **Data Visualization & Dashboarding with R Specialization** in Coursera.
 
-R for Data Science textbook (2e) is available online: https://r4ds.hadley.nz/
+R for Data Science textbook (2e) is available online: https://r4ds.hadley.nz/  
+
+<br>
+
 Collection of R packages: https://www.tidyverse.org/
 
 **Documents focusing on visualization :**
