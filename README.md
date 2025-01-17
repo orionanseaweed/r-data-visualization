@@ -1,6 +1,10 @@
 # r-for-data-science-solution
 
-My answers to practice questions in **R for Data Science** textbook and **Data Visualization & Dashboarding with R Specialization** in Coursera.
+My answers to practice questions from **Data Visualization & Dashboarding with R Specialization** in Coursera.
+
+Authored by Kane - 11/01/2025
+
+------
 
 **Main Sources:**
 1. R for Data Science textbook (2e): https://r4ds.hadley.nz/
