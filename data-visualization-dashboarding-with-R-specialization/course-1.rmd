@@ -2,17 +2,18 @@
 
 ---
 title: "Final Report Exercise"
-author: "XUAN TUNG HOANG"
+author: "Xuan Tung Hoang"
 output: html_document
 ---
 
 ```{r setup, include=FALSE}
-#####DO NOT MODIFY THIS CODE
+
 knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(knitr)
-#####DO NOT MODIFY THIS CODE
+
 dat <- drop_na(read.csv(url("https://www.dropbox.com/s/uhfstf6g36ghxwp/cces_sample_coursera.csv?raw=1")))
+
 ```
 
 # Problem 1 
@@ -20,8 +21,10 @@ dat <- drop_na(read.csv(url("https://www.dropbox.com/s/uhfstf6g36ghxwp/cces_samp
 Create a vector of five numbers of your choice between 0 and 10, save that vector to an object, and use the sum() function to calculate the sum of the numbers.
 
 ```{r,problem1}
+
 dat1 <- c(1, 3, 5, 7, 9)
 sum(dat1)
+
 ```
 
 # Problem 2
@@ -31,10 +34,12 @@ Create a data frame that includes two columns. One column must have the numbers 
 Put your code and solution here:
 
 ```{r,problem2}
+
 alpha <- c(1, 2, 3, 4, 5)
 beta <- c(6, 7, 8, 9, 10)
 my_dat <- data.frame(alpha, beta)
 my_dat
+
 ```
 
 # Problem 3 
@@ -44,24 +49,27 @@ Using the data frame created in Problem 2, use the summary() command a create a 
 Put your code and solution here:
 
 ```{r,problem3}
+
 summary(my_dat$beta)
+
 ```
 
 # Problem 4
 
 There is code for importing the example survey data that will run automatically in the setup chunk for this report (Line 13). Using that data, make a boxplot of the Family Income column using the Base R function (not a figure drawn using qplot). Include your name in the title for the plot. Your name should be in the title. Relabel that x-axis as "Family Income".
 
-Hint: consult the codebook to identify the correct column name for the family income question.
-
 Put your code and solution here:
 
 ```{r,problem4}
+
 dat4 <- boxplot(
   dat$faminc_new,
   xlab = "Family Income",
   main = "Tung's Boxplot of Family Income"
-  )
+)
+
 dat4
+
 ```
 
 # Problem 5
@@ -73,8 +81,10 @@ Use the str() function to provide information about the resulting dataset.
 Put your code and solution here:
  
 ```{r problem5,include=TRUE,echo=TRUE}
+
 dat5 <- dat |> filter(gender == 1 & region %in% c(1,2) & marstat == 1 & newsint == 1)
 str(dat5)
+
 ```
 
 # Problem 6
@@ -84,8 +94,10 @@ Filter the data the same as in Problem 5. Use a R function to create a frequency
 Put your code and solution here:
 
 ```{r problem6,include=TRUE,echo=TRUE}
+
 dat6 <- table(dat5$investor)
 dat6
+
 ``` 
 
 # Problem 7
@@ -97,9 +109,12 @@ Display the first twenty elements of the new column you create.
 Put your code and solution here:
 
 ```{r problem7,include=TRUE,echo=TRUE}
+
 dat71 <- dat |> mutate(tax_scale = CC18_325a + CC18_325d)
 dat7 <- recode(dat71$tax_scale, '2' = 2, '3' = 1, '4' = 0)
+
 dat7[1:20]
+
 ```
 
 # Problem 8
@@ -109,7 +124,9 @@ Use a frequency table command to show how many 0s, 1s, and 2s are in the column 
 Put your code and solution here:
 
 ```{r problem8,include=TRUE,echo=TRUE}
+
 table(dat7)
+
 ```
 
 # Problem 9
@@ -119,11 +136,14 @@ Again using all rows in the original dataset, use summarise and group_by to calc
 Put your code and solution here:
  
 ```{r problem9}
+
 dat9 <- dat |>
   select(region, CC18_308a) |>
   group_by(region) |>
   summarise(Trump_Approve_Mean = mean(CC18_308a))
+
 dat9
+
 ```
  
 # Problem 10
@@ -133,13 +153,15 @@ Again start with all rows in the original dataset, use summarise() to create a s
 Put your code and solution here:
 
 ```{r problem10}
+
 dat10 <- dat |>
   filter(faminc_new %in% c(5:10), investor == 2) |> 
   summarise(
     "Mean Religion Imp." = mean(pew_religimp),
     "Median Religion Imp." = median(pew_religimp),
     "Standard Dev. Religion Imp." = sd(pew_religimp)
-    )
+  )
+
 dat10
 ```
 
@@ -150,16 +172,16 @@ Use kable() and the the summarise() function to create a table with one row and 
 Put your code and solution here:
 
 ```{r problem11}
+
 dat11 <- dat |>
   summarise(
     mean(faminc_new),
     median(faminc_new),
     sd(faminc_new)
   )
-kable(
-  dat11,
-  col.names = c('Mean', 'Median', 'Std. Dev.'),
-  )
+
+kable(dat11, col.names = c('Mean', 'Median', 'Std. Dev.'))
+
 ```
 
 # Problem 12
@@ -171,11 +193,14 @@ Note: you can ignore the "stat_bin()" message that R generates when you draw thi
 Put your code and solution here:
 
 ```{r problem12,message=FALSE}
+
 plot12 <- quickplot(
   dat$pid7,
   geom = "histogram",
   xlab = "Seven-Point Party ID",
   ylab = "Count"
-  )
+)
+
 plot12
+
 ```
