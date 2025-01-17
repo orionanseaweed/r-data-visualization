@@ -1,4 +1,4 @@
-## My Solutions to almost Peer-graded Assignments in Data Visualization & Dashboarding with R Specialization
+# My Peer-graded Assignment Solutions in Data Visualization & Dashboarding with R Specialization
 
 Instructor: Collin Paschall
 
