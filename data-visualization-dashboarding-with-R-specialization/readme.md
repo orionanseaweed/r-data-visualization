@@ -1,4 +1,5 @@
-Coursera: Data Visualization & Dashboarding with R Specialization
+## My Solutions to almost Peer-graded Assignments in Data Visualization & Dashboarding with R Specialization
+
 Instructor: Collin Paschall
 
 https://www.coursera.org/specializations/jhu-data-visualization-dashboarding-with-r
