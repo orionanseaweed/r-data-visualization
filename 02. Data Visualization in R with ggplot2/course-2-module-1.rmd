@@ -1,7 +1,7 @@
 ---
 title: "Week 1 Peer Review"
 output: html_document
-author: Xuan Tung Hoang
+author: "Xuan Tung Hoang"
 ---
 
 ```{r setup, include=FALSE}
@@ -14,7 +14,7 @@ cel <- drop_na(read_csv(url("https://www.dropbox.com/s/4ebgnkdhhxo5rac/cel_volde
 
 ```
 
-Your objective is to replicate these figures, created using the Center of Legislative Effectiveness Data.
+The objective is to replicate these figures, created using the Center of Legislative Effectiveness Data.
 
 **IMPORTANT: Filter your data so you are only displaying information for the 115th Congress.**
 
