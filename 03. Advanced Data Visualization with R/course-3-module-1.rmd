@@ -1,0 +1,268 @@
+---
+title: "More ggplot Figures Peer Review"
+output: html_document
+author: "Xuan Tung Hoang"
+---
+
+## Problem 1
+
+Create the figure in the solution for Problem 1, using the data included in the R Markdown file.
+
+```{r problem_1_data,include=FALSE}
+
+library(tidyverse)
+
+set.seed(12345)
+var1<-runif(50,0,10)
+set.seed(12345)
+var2<-var1+rnorm(50,5,2)
+set.seed(12345)
+var3<- var1*(-rnorm(50,1,.2))
+
+dat1<-tibble(var1,var2,var3)
+
+
+```
+
+```{r problem_1,echo=FALSE,message=FALSE}
+
+plot1 <- ggplot(dat1, aes(x = var1, y = var2)) +
+  geom_point() +
+  geom_smooth(method = "loess") +
+  labs(
+    x = "Variable 1",
+    y = "Variable 2"
+  )
+
+plot1
+
+
+```
+
+## Problem 2
+
+Create the figure in the solution for Problem 2, using the data included in the R Markdown file.
+
+```{r problem_2_data,include=FALSE}
+
+library(GGally)
+
+set.seed(10)
+var1<-runif(50,0,10)
+set.seed(10)
+var2<-var1+rnorm(50,5,2)
+set.seed(10)
+var3<- var1*(-rnorm(50,1,.2))
+
+dat2<-tibble(var1,var2,var3)
+
+ggpairs(dat2)
+
+```
+
+
+```{r solution_p2,echo=FALSE,message=FALSE}
+
+my_scatter <- function(data, mapping){
+  ggplot(data = data, mapping = mapping) + geom_jitter(color = "orange")
+}
+
+my_density <- function(data, mapping){
+  ggplot(data = data, mapping = mapping) + geom_density(fill = "blue")
+}
+
+plot2 <- ggpairs(dat2,
+                 lower = list(continuous = my_scatter),
+                 diag = list(continuous = my_density)
+          )
+
+plot2
+
+```
+
+## Problem 3
+
+Create the figure in the solution for Problem 3, using the data included in the R Markdown file.
+
+```{r problem_3_data,include=FALSE}
+
+#install.packages("ggcorrplot")
+library(ggcorrplot)
+library(ggthemes)
+
+set.seed(12)
+var1<-runif(50,0,10)
+set.seed(12)
+var2<-var1+rnorm(50,5,2)
+set.seed(12)
+var3<- var1*(-rnorm(50,1,.2))
+
+dat3<-tibble(var1,var2,var3)
+
+```
+
+```{r problem3,echo=FALSE}
+
+r <- cor(dat3, use = "complete.obs")
+
+plot3 <- ggcorrplot(r, type = "lower") +
+  theme_gdocs() +
+  labs(x = "", y = "", title = "Correlations")
+
+plot3
+
+```
+
+## Problem 4
+
+Create the figure in the solution for Problem 4, using the data included in the R Markdown file.
+
+```{r problem_4_data,include=FALSE}
+
+set.seed(5678)
+var1<-rnorm(10,25,5)
+names<-letters[1:10]
+
+dat4<-tibble(names,var1)
+
+```
+
+```{r problem_4,echo=FALSE}
+
+plot4 <- ggplot(dat4 , aes(var1, reorder(names, var1))) +
+  geom_point(size = 4, shape = 16) +
+  theme(
+    panel.grid.major.x = element_blank(),
+    panel.grid.minor.x = element_blank(),
+    panel.grid.major.y = element_line(color = 'red', linetype = "dotted"),
+    panel.grid.minor.y = element_blank()
+  ) +
+  labs(
+    x = "Variable 1",
+    y = "",
+  )
+
+plot4
+
+```
+
+## Problem 5
+
+Create the figure in the solution for Problem 5, using the data included in the R Markdown file.
+
+```{r problem_5_data,include=FALSE}
+
+set.seed(13)
+var1<-rnorm(10,25,5)
+names<-letters[1:10]
+
+dat5<-tibble(names,var1)
+
+```
+
+```{r problem_5,echo=FALSE}
+
+plot5 <- ggplot(dat5, aes(reorder(names, var1), var1)) +
+  geom_point(color = 'darkgreen', shape = 16) +
+  geom_segment(aes(y = 0, yend = var1), color = 'darkgreen', linewidth = 0.5) +
+  theme(
+    axis.text.x = element_text(angle = 90)
+  ) +
+  labs(
+    x = "",
+    y = "Variable 1"
+  )
+
+plot5
+
+```
+
+## Problem 6
+
+Create the figure in the solution for Problem 6, using the data included in the R Markdown file.
+
+```{r problem_6_data,include=FALSE}
+
+#####DO NOT MODIFY THIS CHUNK
+
+set.seed(8)
+fiction<-tibble(Genre=rep("Fiction",5),Time=seq(1:5),Total=sample(1:10,5))
+set.seed(7)
+biography<-tibble(Genre=rep("Biography",5),Time=seq(1:5),Total=sample(1:10,5))
+set.seed(9)
+mystery<-tibble(Genre=rep("Mystery",5),Time=seq(1:5),Total=sample(1:10,5))
+
+books_checked_out<-bind_rows(fiction,biography,mystery)
+
+```
+
+```{r problem_6,echo=FALSE}
+
+plot6 <-ggplot(books_checked_out, aes(x = Time, y = Total, fill = Genre)) +
+  geom_area() +
+  labs(
+    title = "Books Checked Out",
+    x = "Time",
+    y = "Total"
+  )
+
+plot6
+
+```
+
+## Problem 7
+
+Create the figure in the solution for Problem 7, using the data included in the R Markdown file.
+
+```{r problem_7_data,include=FALSE}
+
+#install.packages("ggalt")
+library(ggalt)
+
+books_checked_out2 <- books_checked_out %>%
+  filter(Time==1 | Time==5) %>%
+  pivot_wider(names_from = Time,values_from=Total) %>%
+  rename(Time1=`1`,Time5=`5`)
+
+```
+   
+```{r,problem_7,echo=FALSE,message=FALSE}   
+
+plot7 <- ggplot(books_checked_out2, aes(y = reorder(Genre, Time1), x = Time1, xend = Time5)) +
+  geom_dumbbell(
+    colour_x = "red",
+    colour_xend = "purple",
+    size_x = 4, 
+    size_xend = 4
+  ) +
+  labs(
+    x = "",
+    y = "Genre"
+  )
+
+plot7
+
+```
+
+## Problem 8
+
+Create the figure in the solution for Problem 8, using the data included in the R Markdown file.
+
+```{r, problem_8_data,include=FALSE}
+
+pie_dat<-c(1,2,3,4,5)
+
+```
+
+```{r, problem_8,echo=FALSE}
+
+library(RColorBrewer)
+
+my_color<-brewer.pal(5,"Spectral")
+
+pie(pie_dat, col = my_color, border = 'black')
+
+```
+
+
+
