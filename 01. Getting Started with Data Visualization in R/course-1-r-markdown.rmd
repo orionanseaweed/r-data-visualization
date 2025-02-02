@@ -2,8 +2,8 @@
 
 ---
 title: "Final Report Exercise"
-author: "Xuan Tung Hoang"
 output: html_document
+author: "Xuan Tung Hoang"
 ---
 
 ```{r setup, include=FALSE}
