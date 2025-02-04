@@ -7,7 +7,7 @@ dat <- read_csv(url("https://www.dropbox.com/s/uhfstf6g36ghxwp/cces_sample_cours
 dat <- dat %>% select(c("pid7", "ideo5"))
 dat <- drop_na(dat)
 
-ui<- fluidPage(
+ui <- fluidPage(
   
     sliderInput(inputId = "my_ideo5",
                           "Select Five Point Ideology (1=Very liberal, 5=Very conservative)",
@@ -17,7 +17,7 @@ ui<- fluidPage(
  
 )
 
-server<-function(input, output, session){
+server <- function(input, output, session){
   
   output$plot <- renderPlot(
     ggplot(filter(dat, ideo5 == input$my_ideo5), aes(x = pid7)) +
